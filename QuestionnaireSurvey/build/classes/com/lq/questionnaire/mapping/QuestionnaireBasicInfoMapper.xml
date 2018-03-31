@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lq.questionnaire.dao.QuestionnaireBasicInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lq.questionnaire.pojo.QuestionnaireBasicInfo" >
+    <id column="cnt" property="cnt" jdbcType="INTEGER" />
+    <id column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="questionnaire_id" property="questionnaireId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="questionnaire_type_id" property="questionnaireTypeId" jdbcType="INTEGER" />
+    <result column="limit_1" property="limit1" jdbcType="VARCHAR" />
+    <result column="limit_2" property="limit2" jdbcType="VARCHAR" />
+    <result column="limit_3" property="limit3" jdbcType="VARCHAR" />
+    <result column="questionnaire_status" property="questionnaireStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cnt, create_date, questionnaire_id, user_id, questionnaire_type_id, limit_1, limit_2, 
+    limit_3, questionnaire_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.lq.questionnaire.pojo.QuestionnaireBasicInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from questionnaire_basic_info
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and create_date = #{createDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lq.questionnaire.pojo.QuestionnaireBasicInfoKey" >
+    delete from questionnaire_basic_info
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and create_date = #{createDate,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.lq.questionnaire.pojo.QuestionnaireBasicInfo" >
+    insert into questionnaire_basic_info (cnt, create_date, questionnaire_id, 
+      user_id, questionnaire_type_id, limit_1, 
+      limit_2, limit_3, questionnaire_status
+      )
+    values (#{cnt,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{questionnaireId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{questionnaireTypeId,jdbcType=INTEGER}, #{limit1,jdbcType=VARCHAR}, 
+      #{limit2,jdbcType=VARCHAR}, #{limit3,jdbcType=VARCHAR}, #{questionnaireStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lq.questionnaire.pojo.QuestionnaireBasicInfo" >
+    insert into questionnaire_basic_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cnt != null" >
+        cnt,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="questionnaireId != null" >
+        questionnaire_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="questionnaireTypeId != null" >
+        questionnaire_type_id,
+      </if>
+      <if test="limit1 != null" >
+        limit_1,
+      </if>
+      <if test="limit2 != null" >
+        limit_2,
+      </if>
+      <if test="limit3 != null" >
+        limit_3,
+      </if>
+      <if test="questionnaireStatus != null" >
+        questionnaire_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cnt != null" >
+        #{cnt,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionnaireId != null" >
+        #{questionnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireTypeId != null" >
+        #{questionnaireTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="limit1 != null" >
+        #{limit1,jdbcType=VARCHAR},
+      </if>
+      <if test="limit2 != null" >
+        #{limit2,jdbcType=VARCHAR},
+      </if>
+      <if test="limit3 != null" >
+        #{limit3,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireStatus != null" >
+        #{questionnaireStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lq.questionnaire.pojo.QuestionnaireBasicInfo" >
+    update questionnaire_basic_info
+    <set >
+      <if test="questionnaireId != null" >
+        questionnaire_id = #{questionnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireTypeId != null" >
+        questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="limit1 != null" >
+        limit_1 = #{limit1,jdbcType=VARCHAR},
+      </if>
+      <if test="limit2 != null" >
+        limit_2 = #{limit2,jdbcType=VARCHAR},
+      </if>
+      <if test="limit3 != null" >
+        limit_3 = #{limit3,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireStatus != null" >
+        questionnaire_status = #{questionnaireStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and create_date = #{createDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lq.questionnaire.pojo.QuestionnaireBasicInfo" >
+    update questionnaire_basic_info
+    set questionnaire_id = #{questionnaireId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      limit_1 = #{limit1,jdbcType=VARCHAR},
+      limit_2 = #{limit2,jdbcType=VARCHAR},
+      limit_3 = #{limit3,jdbcType=VARCHAR},
+      questionnaire_status = #{questionnaireStatus,jdbcType=VARCHAR}
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and create_date = #{createDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

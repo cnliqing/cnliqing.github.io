@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lq.questionnaire.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.lq.questionnaire.pojo.Admin" >
+    <id column="admin_id" property="adminId" jdbcType="VARCHAR" />
+    <id column="admin_login_name" property="adminLoginName" jdbcType="VARCHAR" />
+    <result column="admin_passwd" property="adminPasswd" jdbcType="VARCHAR" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    admin_id, admin_login_name, admin_passwd, admin_name
+  </sql>
+  <select id="selectByAdminLoginName" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_login_name = #{adminLoginName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByAdminId" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_id = #{adminId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByAdminId" parameterType="String" >
+    delete from admin
+    where admin_id = #{adminId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertAdmin" parameterType="com.lq.questionnaire.pojo.Admin" >
+    insert into admin (admin_id, admin_login_name, admin_passwd, 
+      admin_name)
+    values (#{adminId,jdbcType=VARCHAR}, #{adminLoginName,jdbcType=VARCHAR}, #{adminPasswd,jdbcType=VARCHAR}, 
+      #{adminName,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

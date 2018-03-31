@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lq.questionnaire.dao.AnswerBasicInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lq.questionnaire.pojo.AnswerBasicInfo" >
+    <id column="cnt" property="cnt" jdbcType="INTEGER" />
+    <id column="status" property="status" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="questionnaire_id" property="questionnaireId" jdbcType="VARCHAR" />
+    <result column="time_begin" property="timeBegin" jdbcType="TIMESTAMP" />
+    <result column="time_end" property="timeEnd" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cnt, status, user_id, questionnaire_id, time_begin, time_end
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.lq.questionnaire.pojo.AnswerBasicInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from answer_basic_info
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and status = #{status,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lq.questionnaire.pojo.AnswerBasicInfoKey" >
+    delete from answer_basic_info
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and status = #{status,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lq.questionnaire.pojo.AnswerBasicInfo" >
+    insert into answer_basic_info (cnt, status, user_id, 
+      questionnaire_id, time_begin, time_end
+      )
+    values (#{cnt,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{questionnaireId,jdbcType=VARCHAR}, #{timeBegin,jdbcType=TIMESTAMP}, #{timeEnd,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lq.questionnaire.pojo.AnswerBasicInfo" >
+    insert into answer_basic_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cnt != null" >
+        cnt,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="questionnaireId != null" >
+        questionnaire_id,
+      </if>
+      <if test="timeBegin != null" >
+        time_begin,
+      </if>
+      <if test="timeEnd != null" >
+        time_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cnt != null" >
+        #{cnt,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireId != null" >
+        #{questionnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="timeBegin != null" >
+        #{timeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeEnd != null" >
+        #{timeEnd,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lq.questionnaire.pojo.AnswerBasicInfo" >
+    update answer_basic_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireId != null" >
+        questionnaire_id = #{questionnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="timeBegin != null" >
+        time_begin = #{timeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeEnd != null" >
+        time_end = #{timeEnd,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and status = #{status,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lq.questionnaire.pojo.AnswerBasicInfo" >
+    update answer_basic_info
+    set user_id = #{userId,jdbcType=VARCHAR},
+      questionnaire_id = #{questionnaireId,jdbcType=VARCHAR},
+      time_begin = #{timeBegin,jdbcType=TIMESTAMP},
+      time_end = #{timeEnd,jdbcType=TIMESTAMP}
+    where cnt = #{cnt,jdbcType=INTEGER}
+      and status = #{status,jdbcType=INTEGER}
+  </update>
+</mapper>

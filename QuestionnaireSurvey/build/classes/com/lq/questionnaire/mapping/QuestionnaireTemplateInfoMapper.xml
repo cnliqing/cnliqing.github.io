@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lq.questionnaire.dao.QuestionnaireTemplateInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lq.questionnaire.pojo.QuestionnaireTemplateInfo" >
+    <id column="questionnaire_template_id" property="questionnaireTemplateId" jdbcType="VARCHAR" />
+    <id column="question_template_cnt" property="questionTemplateCnt" jdbcType="INTEGER" />
+    <result column="questionnaire_type_id" property="questionnaireTypeId" jdbcType="INTEGER" />
+    <result column="question_type_id" property="questionTypeId" jdbcType="INTEGER" />
+    <result column="create_template_date" property="createTemplateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="question_template_content" property="questionTemplateContent" jdbcType="LONGVARCHAR" />
+    <result column="question_template_answer" property="questionTemplateAnswer" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    questionnaire_template_id, question_template_cnt, questionnaire_type_id, question_type_id, 
+    create_template_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    question_template_content, question_template_answer
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from questionnaire_template_info
+    where questionnaire_template_id = #{questionnaireTemplateId,jdbcType=VARCHAR}
+      and question_template_cnt = #{questionTemplateCnt,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoKey" >
+    delete from questionnaire_template_info
+    where questionnaire_template_id = #{questionnaireTemplateId,jdbcType=VARCHAR}
+      and question_template_cnt = #{questionTemplateCnt,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoWithBLOBs" >
+    insert into questionnaire_template_info (questionnaire_template_id, question_template_cnt, 
+      questionnaire_type_id, question_type_id, create_template_date, 
+      question_template_content, question_template_answer
+      )
+    values (#{questionnaireTemplateId,jdbcType=VARCHAR}, #{questionTemplateCnt,jdbcType=INTEGER}, 
+      #{questionnaireTypeId,jdbcType=INTEGER}, #{questionTypeId,jdbcType=INTEGER}, #{createTemplateDate,jdbcType=TIMESTAMP}, 
+      #{questionTemplateContent,jdbcType=LONGVARCHAR}, #{questionTemplateAnswer,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoWithBLOBs" >
+    insert into questionnaire_template_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionnaireTemplateId != null" >
+        questionnaire_template_id,
+      </if>
+      <if test="questionTemplateCnt != null" >
+        question_template_cnt,
+      </if>
+      <if test="questionnaireTypeId != null" >
+        questionnaire_type_id,
+      </if>
+      <if test="questionTypeId != null" >
+        question_type_id,
+      </if>
+      <if test="createTemplateDate != null" >
+        create_template_date,
+      </if>
+      <if test="questionTemplateContent != null" >
+        question_template_content,
+      </if>
+      <if test="questionTemplateAnswer != null" >
+        question_template_answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionnaireTemplateId != null" >
+        #{questionnaireTemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTemplateCnt != null" >
+        #{questionTemplateCnt,jdbcType=INTEGER},
+      </if>
+      <if test="questionnaireTypeId != null" >
+        #{questionnaireTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="questionTypeId != null" >
+        #{questionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTemplateDate != null" >
+        #{createTemplateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionTemplateContent != null" >
+        #{questionTemplateContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionTemplateAnswer != null" >
+        #{questionTemplateAnswer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoWithBLOBs" >
+    update questionnaire_template_info
+    <set >
+      <if test="questionnaireTypeId != null" >
+        questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="questionTypeId != null" >
+        question_type_id = #{questionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTemplateDate != null" >
+        create_template_date = #{createTemplateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionTemplateContent != null" >
+        question_template_content = #{questionTemplateContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionTemplateAnswer != null" >
+        question_template_answer = #{questionTemplateAnswer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where questionnaire_template_id = #{questionnaireTemplateId,jdbcType=VARCHAR}
+      and question_template_cnt = #{questionTemplateCnt,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfoWithBLOBs" >
+    update questionnaire_template_info
+    set questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      question_type_id = #{questionTypeId,jdbcType=INTEGER},
+      create_template_date = #{createTemplateDate,jdbcType=TIMESTAMP},
+      question_template_content = #{questionTemplateContent,jdbcType=LONGVARCHAR},
+      question_template_answer = #{questionTemplateAnswer,jdbcType=LONGVARCHAR}
+    where questionnaire_template_id = #{questionnaireTemplateId,jdbcType=VARCHAR}
+      and question_template_cnt = #{questionTemplateCnt,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lq.questionnaire.pojo.QuestionnaireTemplateInfo" >
+    update questionnaire_template_info
+    set questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      question_type_id = #{questionTypeId,jdbcType=INTEGER},
+      create_template_date = #{createTemplateDate,jdbcType=TIMESTAMP}
+    where questionnaire_template_id = #{questionnaireTemplateId,jdbcType=VARCHAR}
+      and question_template_cnt = #{questionTemplateCnt,jdbcType=INTEGER}
+  </update>
+</mapper>

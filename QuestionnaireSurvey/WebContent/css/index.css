@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	padding: 50px;
+}
+
+.navbar{
+	height: 50px;
+}
+
+#navbar{
+	position: relative;
+}
+
+.navbar .container{
+  position: absolute;
+}
+.btn-group {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+@media (max-width: 767px){
+  .btn-group{
+    right: 80px;
+  }
+}

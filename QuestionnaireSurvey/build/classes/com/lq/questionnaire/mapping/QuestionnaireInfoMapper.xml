@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lq.questionnaire.dao.QuestionnaireInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lq.questionnaire.pojo.QuestionnaireInfo" >
+    <id column="questionnaire_id" property="questionnaireId" jdbcType="VARCHAR" />
+    <id column="question_cnt" property="questionCnt" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="questionnaire_type_id" property="questionnaireTypeId" jdbcType="INTEGER" />
+    <result column="question_type_id" property="questionTypeId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lq.questionnaire.pojo.QuestionnaireInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="question_content" property="questionContent" jdbcType="LONGVARCHAR" />
+    <result column="question_answer" property="questionAnswer" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    questionnaire_id, question_cnt, user_id, questionnaire_type_id, question_type_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    question_content, question_answer
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from questionnaire_info
+    where questionnaire_id = #{questionnaireId,jdbcType=VARCHAR}
+      and question_cnt = #{questionCnt,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfoKey" >
+    delete from questionnaire_info
+    where questionnaire_id = #{questionnaireId,jdbcType=VARCHAR}
+      and question_cnt = #{questionCnt,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfoWithBLOBs" >
+    insert into questionnaire_info (questionnaire_id, question_cnt, user_id, 
+      questionnaire_type_id, question_type_id, question_content, 
+      question_answer)
+    values (#{questionnaireId,jdbcType=VARCHAR}, #{questionCnt,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{questionnaireTypeId,jdbcType=INTEGER}, #{questionTypeId,jdbcType=INTEGER}, #{questionContent,jdbcType=LONGVARCHAR}, 
+      #{questionAnswer,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfoWithBLOBs" >
+    insert into questionnaire_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionnaireId != null" >
+        questionnaire_id,
+      </if>
+      <if test="questionCnt != null" >
+        question_cnt,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="questionnaireTypeId != null" >
+        questionnaire_type_id,
+      </if>
+      <if test="questionTypeId != null" >
+        question_type_id,
+      </if>
+      <if test="questionContent != null" >
+        question_content,
+      </if>
+      <if test="questionAnswer != null" >
+        question_answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionnaireId != null" >
+        #{questionnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionCnt != null" >
+        #{questionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionnaireTypeId != null" >
+        #{questionnaireTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="questionTypeId != null" >
+        #{questionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null" >
+        #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionAnswer != null" >
+        #{questionAnswer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfoWithBLOBs" >
+    update questionnaire_info
+    <set >
+      <if test="questionnaireTypeId != null" >
+        questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="questionTypeId != null" >
+        question_type_id = #{questionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null" >
+        question_content = #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionAnswer != null" >
+        question_answer = #{questionAnswer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where questionnaire_id = #{questionnaireId,jdbcType=VARCHAR}
+      and question_cnt = #{questionCnt,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfoWithBLOBs" >
+    update questionnaire_info
+    set questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      question_type_id = #{questionTypeId,jdbcType=INTEGER},
+      question_content = #{questionContent,jdbcType=LONGVARCHAR},
+      question_answer = #{questionAnswer,jdbcType=LONGVARCHAR}
+    where questionnaire_id = #{questionnaireId,jdbcType=VARCHAR}
+      and question_cnt = #{questionCnt,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lq.questionnaire.pojo.QuestionnaireInfo" >
+    update questionnaire_info
+    set questionnaire_type_id = #{questionnaireTypeId,jdbcType=INTEGER},
+      question_type_id = #{questionTypeId,jdbcType=INTEGER}
+    where questionnaire_id = #{questionnaireId,jdbcType=VARCHAR}
+      and question_cnt = #{questionCnt,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>
